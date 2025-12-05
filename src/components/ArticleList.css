@@ -1,0 +1,59 @@
+.article-list {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.article-card {
+  display: block;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.article-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.user-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.article-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
