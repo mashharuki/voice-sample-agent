@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# Voice Agent PWA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+音声操作でQiita記事を検索できるプロトタイプPWAアプリです。
+Siriショートカットと連携し、「Hey Siri, Voice Agent」と話しかけるだけで検索を開始できます。
 
-Currently, two official plugins are available:
+## 特徴
+- 🎙 **Voice UI**: Siriショートカットを通じたシームレスな音声入力。
+- 📱 **PWA Support**: iOSのホーム画面に追加してアプリとして利用可能。
+- 🎨 **Cyberpunk Design**: モダンで没入感のあるダークモード＆ネオンデザイン。
+- 🔍 **Qiita Search**: Qiita API v2 を使用した高速な記事検索。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## セットアップ
 
-## React Compiler
+### 1. 開発環境のセットアップ
+\`\`\`bash
+# 依存関係のインストール
+npm install
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# 開発サーバーの起動
+npm run dev
+\`\`\`
 
-## Expanding the ESLint configuration
+### 2. PWAとしてインストール
+1. アプリをVercelなどにデプロイするか、ローカルサーバーを外部公開します。
+2. iPhoneのSafariでアプリを開きます。
+3. 「共有」アイコン -> 「ホーム画面に追加」をタップします。
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Siriショートカット設定ガイド
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Siriからアプリを呼び出すために、以下の設定を行ってください。
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 手順
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. iPhoneで **「ショートカット」アプリ** を開きます。
+2. 右上の「＋」ボタンをタップして新規ショートカットを作成します。
+3. ショートカット名を **「Voice Agent」** など、呼び出しやすい名前に変更します。
+4. **「アクションを追加」** をタップし、以下の2つのアクションを設定します。
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#### アクション1: 入力を要求
+- 検索バーで「入力を要求」と検索して追加。
+- 設定: **テキスト** を要求（プロンプト: 「何を調べますか？」など任意に変更可）
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### アクション2: URLを開く
+- 検索バーで「URLを開く」と検索して追加。
+- URL欄に以下のように入力します:
+  \`\`\`
+  https://<あなたのアプリのURL>/?q=<選択した変数>
+  \`\`\`
+  - `<あなたのアプリのURL>`: デプロイ先のURL（例: `https://voice-agent.vercel.app`）
+  - `<選択した変数>`: キーボードの上に表示される変数バーから**「指定入力」**（アクション1の結果）を選択します。
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 使い方
+1. iPhoneに向かって **「Hey Siri, Voice Agent」** と話しかけます。
+2. Siriが「何を調べますか？」と聞いてくるので、検索したいキーワード（例: 「React」）を答えます。
+3. アプリが自動的に起動し、検索結果が表示されます。
+
+## 技術スタック
+- React + TypeScript + Vite
+- vite-plugin-pwa
+- CSS Modules (Vanilla CSS)
+- Qiita API v2
